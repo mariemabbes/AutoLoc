@@ -3,6 +3,7 @@ package tn.esprit.autoloc.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "vehicule")
@@ -35,4 +36,15 @@ public class Vehicule {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private StatutVehicule statut;
+
+    @ManyToOne
+    private Agence agence;
+
+    @OneToMany(mappedBy = "vehicule", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private Set<Reservation> reservations;
+
+    @ManyToMany(mappedBy = "vehicules", fetch = FetchType.LAZY)
+    private Set<Equipement> equipements;
+
+
 }
