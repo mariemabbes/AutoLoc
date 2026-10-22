@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import tn.esprit.autoloc.domain.Agence;
 import tn.esprit.autoloc.domain.CategorieVehicule;
@@ -17,12 +18,16 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import tn.esprit.autoloc.service.IAgenceService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -32,6 +37,8 @@ public class AgenceTests {
     private AgenceRepositoryMock basicAgenceRepository;
     @Autowired
     private IAgenceRepository fullAgenceRepository;
+    @Autowired
+    private IAgenceService agenceService;
 
 
     private void addAgence(CrudRepository<Agence,Long> crudRepository) {
@@ -144,10 +151,24 @@ public class AgenceTests {
 
         Assert.fail(sb.toString());
     }
+    @Test
+    public void createAgence() {
+        Agence agence = new Agence();
+        agence.setNom("Agence Tunis");
+        agence.setAdresse("Avenue Habib Bourguiba, Tunis");
+        agence.setTelephone("71000000");
+        agence.setVille("Tunis");
+        Agence saved = agenceService.create(agence);
+
+        assertNotNull(saved);
+        assertNotNull(saved.getIdAgence());
+        assertEquals("Agence Tunis", saved.getNom());
+    }
 
 
 
 }
+@Repository
 interface  AgenceRepositoryMock  extends CrudRepository<Agence,Long> {
 
 }
