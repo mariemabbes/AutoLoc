@@ -3,6 +3,7 @@ package tn.esprit.autoloc.service;
 import org.springframework.stereotype.Service;
 import tn.esprit.autoloc.Utils;
 import tn.esprit.autoloc.domain.Employe;
+import tn.esprit.autoloc.domain.Vehicule;
 import tn.esprit.autoloc.repository.IEmployeRepository;
 
 @Service

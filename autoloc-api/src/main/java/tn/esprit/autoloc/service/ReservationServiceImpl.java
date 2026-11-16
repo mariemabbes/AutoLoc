@@ -2,6 +2,7 @@ package tn.esprit.autoloc.service;
 
 import org.springframework.stereotype.Service;
 import tn.esprit.autoloc.domain.Reservation;
+import tn.esprit.autoloc.domain.Vehicule;
 import tn.esprit.autoloc.repository.IReservationRepository;
 
 @Service

@@ -1,4 +1,6 @@
 package tn.esprit.autoloc.service;
 
-public interface IEquipementService {
+import tn.esprit.autoloc.domain.Equipement;
+
+public interface IEquipementService extends IGenericService<Equipement, Long> {
 }
